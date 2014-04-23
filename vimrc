@@ -1,52 +1,77 @@
-" Pathogen calls
-call pathogen#infect()
-call pathogen#helptags()
+if has('vim_starting')
+  set nocompatible               " Be iMproved
 
-"set nocompatible      " We're running Vim, not Vi!
-"syntax on             " Enable syntax highlighting
-"filetype on           " Enable filetype detection
-"filetype indent on    " Enable filetype-specific indenting
-"filetype plugin on    " Enable filetype-specific plugins
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-set wildignore=*/tmp,*/cache,*/public/system
-set wildmode=longest:full,list:full
+" Required:
+call neobundle#rc(expand('~/.vim/bundle/'))
 
-" ctrlp dont manage directories
-" https://github.com/kien/ctrlp.vim
-let g:ctrlp_working_path_mode = 0
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
 
-" refs:
-"  https://github.com/tsaleh/dotfiles/blob/master/vim/vimrc
-"  https://github.com/kassio/vim_configs/blob/master/vimrc
-set mouse=a
+" My Bundles here:
+NeoBundle 'Shougo/neocomplcache.vim'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'chriskempson/vim-tomorrow-theme'
+NeoBundle 'mileszs/ack.vim'
+NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'dart-lang/dart-vim-plugin'
 
-set nobackup              " turnoff backup
-set noswapfile
-" set backup              " keep a backup file
-" set backupdir=~/.vim/backups
-set history=100         " keep 50 lines of command line history
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+syntax on
+
+" fix backspace in mac
+set backspace=2
+
+" scriptencoding utf8
+set encoding=utf8
+set fileencoding=utf8
+set termencoding=utf8
+
+"set wildmenu wildignorecase
+set wildmode=list:longest,full
+set wildignore+=*.pyc,*.zip,*.gz,*.bz,*.tar,*.jpg,*.png,*.gif,*.avi,*.wmv,*.ogg,*.mp3,*.mov,*/tmp,*/cache,*/public/system
+
+set incsearch hls ignorecase smartcase
+set lazyredraw
+set showcmd
 set ruler               " show the cursor position all the time
 set incsearch           " do incremental searching
 set expandtab
 set shiftwidth=2
 set tabstop=2
-set helpheight=1000
 set autoindent
+set hls
+
+"split position
+"set splitbelow
+"set splitright
 
 set t_Co=256
-"colorscheme zenburn
+colorscheme Tomorrow-Night
 
-if has("gui_running")
-  "colorscheme railscasts
-  "colorscheme bespin
-  colorscheme jellybeans
-  set lines=42
-  set columns=120
-  "set guifont=Ubuntu\ Mono\ 11
-  "set guifont=Monospace\ 9
-  set guifont=Monaco\ 9
+" Auto remove white space
+autocmd BufWritePre * :%s/\s\+$//e
 
-  " auto open vim in every tab
-  " autocmd VimEnter * NERDTree
-  " autocmd BufEnter * NERDTreeMirror
-endif
+set statusline=[%n]\ %<%.55f\ %h%w%m%r%y
+set statusline+=%{fugitive#statusline()}
+set statusline+=%=
+set statusline+=[%c,%l/%L\|%P\]
+set laststatus=2
