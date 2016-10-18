@@ -1,0 +1,88 @@
+[user]
+	name = Danilo Resende
+	email = danilo.isr@gmail.com
+[core]
+	excludesfile = /Users/danilo/.gitignore
+	editor = `which vim`
+[help]
+  #format = web
+  #browser = GC
+  #autocorrect = 1
+[format]
+  pretty = %C(yellow)%h%Cblue%d%Creset %s %C(green) %an, %ar%Creset
+[browser "GC"]
+  #cmd = open
+[push]
+  default = current
+[color]
+  branch = 1
+  diff = auto
+  interactive = 1
+  status = 1
+  grep = 1
+  ui = auto
+  pager = 1
+[color "decorate"]
+  branch = 1
+[mergetool]
+  tool = atom
+[difftool]
+  tool = atom
+  prompt = false
+[alias]
+  a = add
+  alias = config --get-regex alias
+  b = branch
+  ba = branch -a
+  # recent branches
+  br = !git for-each-ref --sort=-committerdate refs/heads/ \
+    --format='%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' \
+    | column -ts'|'
+  c = commit -v
+  ca = commit -v -a
+  cam = commit --amend
+  co = checkout
+  cp = cherry-pick
+  d = diff
+  dc = diff --cached
+  dm = diff master
+  f = fetch
+  fix = commit --amend -C HEAD
+  l = log --graph
+  #l = log --oneline --decorate=full
+  m = merge --no-ff
+  mf = merge --ff-only
+  p = push
+  pl = pull
+  pr = pull-request
+  r = reset
+  rb = rebase
+  rba = rebase --abort
+  rbc = rebase --continue
+  rbi = rebase --ignore
+  rh = reset --hard
+  rmb = !sh -c 'git branch -d $1 && git push origin :$1' -
+  s = status -sb
+  sa = stash apply
+  sp = stash pop
+  sq = rebase --interactive origin/master
+  ss = stash
+  st = status
+  today = log --stat --since=1.day --graph --pretty=oneline --abbrev-commit --date=relative
+  tl = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset %s%Creset - %Cblue%d%Creset'
+  tree = log --pretty=format:'%Cred%h%Creset - %C(yellow)%an%Cgreen(%cr)%Creset - %s%Creset' --graph
+  un = reset HEAD
+  np = !git --no-pager
+# Github
+[url "git://github.com/"]# Read-only
+  insteadOf = gh:
+[url "git@github.com:"]# With write access
+  insteadOf = wgh:
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[init]
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
