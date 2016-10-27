@@ -15,9 +15,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 
-" Plug 'Valloric/YouCompleteMe'
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
+Plug 'Valloric/YouCompleteMe'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " colors
 Plug 'chriskempson/base16-vim'
@@ -31,6 +31,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
 Plug 'othree/html5.vim'
 Plug 'vim-scripts/haskell.vim'
+Plug 'vim-ruby/vim-ruby'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -83,8 +84,9 @@ set wildmode=list:longest,full
 
 set hidden
 set undofile
-set undodir=~/tmp/vim
-set dir=~/tmp/vim
+silent !mkdir -p /tmp/vim > /dev/null
+set undodir=/tmp/vim
+set dir=/tmp/vim
 
 set encoding=utf8
 set fileencoding=utf8
@@ -102,35 +104,27 @@ runtime macros/matchit.vim
 
 " ctrlp stuffs
 " let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
-let g:ctrlp_follow_symlinks = 1
-let g:ctrlp_working_path_mode = 'rw'
-let g:ctrlp_user_command
-  \ = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" let g:ctrlp_follow_symlinks = 1
+" let g:ctrlp_working_path_mode = 'rw'
+" let g:ctrlp_user_command
+"   \ = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 let mapleader = "\<Space>"
-nmap <Leader>bb :BufExplorer<CR>
-nmap <silent> <C-b> :BufExplorer<CR>
+
+" imap jj <esc>
 
 " Clearing search results
 nmap <silent> <C-l> :nohl<CR>
 
-" nmap <Leader>pp :CtrlP<CR>
-" nmap <Leader>pb :CtrlPBuffer<CR>
-" nmap <Leader>pm :CtrlPMRU<CR>
-nmap <silent> <Leader><Leader> :Files<CR>
-nmap <silent> <Leader><CR> :Buffer<CR>
-nmap <silent> <C-p> :Files<CR>
-nmap <Leader>pp :Files<CR>
-nmap <Leader>pb :Buffers<CR>
+nmap <silent> <Leader>a :Files<CR>
+nmap <silent> <Leader>s :BufExplorer<CR>
+nmap <silent> <Leader>d :History<CR>
+nmap <silent> <Leader>f :NERDTreeFind<CR>
+nmap <silent> <Leader>g :NERDTreeToggle<CR>
 
-nmap <Leader>tg :Tagbar<CR>
-
-nmap <Leader>tt :NERDTreeToggle<CR>
-nmap <Leader>tf :NERDTreeFind<CR>
-nmap <Leader>tc :e %:p:h<CR>
-
-nmap <Leader>s :wa<CR>
-nmap <Leader>q :q<CR>
+nmap <silent> <Leader>j :Tagbar<CR>
+nmap <silent> <Leader>k :e %:p:h<CR>
+nmap <silent> <Leader>l :Buffer<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -143,6 +137,6 @@ nmap ga <Plug>(EasyAlign)
 " let g:ycm_key_list_previous_completion = ['<Up>']
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsExpandTrigger="<c-l>"
 " let g:UltiSnipsJumpForwardTrigger="<c-n>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-p>"
