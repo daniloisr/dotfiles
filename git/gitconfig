@@ -1,9 +1,9 @@
 [user]
-	name = Danilo Resende
-	email = danilo.isr@gmail.com
+  name = Danilo Resende
+  email = danilo.isr@gmail.com
 [core]
-	excludesfile = /Users/danilo/.gitignore
-	editor = `which vim`
+  excludesfile = ~/.gitignore
+  editor = `which vim`
 [help]
   #format = web
   #browser = GC
@@ -79,10 +79,10 @@
 [url "git@github.com:"]# With write access
   insteadOf = wgh:
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
 [init]
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
