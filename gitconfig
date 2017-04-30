@@ -4,10 +4,6 @@
 [core]
   excludesfile = ~/.gitignore
   editor = `which vim`
-[help]
-  #format = web
-  #browser = GC
-  #autocorrect = 1
 [format]
   pretty = %C(yellow)%h%Cblue%d%Creset %s %C(green) %an, %ar%Creset
 [browser "GC"]
@@ -24,11 +20,6 @@
   pager = 1
 [color "decorate"]
   branch = 1
-[mergetool]
-  tool = atom
-[difftool]
-  tool = atom
-  prompt = false
 [alias]
   a = add
   alias = config --get-regex alias
@@ -86,3 +77,7 @@
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
   required = true
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg2
