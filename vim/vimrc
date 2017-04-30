@@ -12,7 +12,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-" Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 
 Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
@@ -33,6 +33,11 @@ Plug 'vim-scripts/haskell.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'rust-lang/rust.vim'
 Plug 'slim-template/vim-slim'
+Plug 'kylef/apiblueprint.vim'
+Plug 'fatih/vim-go'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'mxw/vim-jsx'
+Plug 'mustache/vim-mustache-handlebars'
 
 " Add plugins to &runtimepath
 call plug#end()
