@@ -3,13 +3,13 @@
   email = danilo.isr@gmail.com
 [core]
   excludesfile = ~/.gitignore
-  editor = `which vim`
+  editor = /usr/bin/vim
 [format]
   pretty = %C(yellow)%h%Cblue%d%Creset %s %C(green) %an, %ar%Creset
 [browser "GC"]
   #cmd = open
 [push]
-  default = current
+  default = simple
 [color]
   branch = 1
   diff = auto
@@ -26,9 +26,10 @@
   b = branch
   ba = branch -a
   # recent branches
-  br = !git for-each-ref --sort=-committerdate refs/heads/ \
-    --format='%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' \
-    | column -ts'|'
+  br = !git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)|%(committerdate:relative)' | column -ts'|'
+  ; br = !git for-each-ref --sort=-committerdate refs/heads/ \
+  ;   --format='%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:magenta)%(authorname)%(color:reset)' \
+  ;   | column -ts'|'
   c = commit -v
   ca = commit -v -a
   cam = commit --amend

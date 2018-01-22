@@ -5,6 +5,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-rhubarb'
 Plug 'mileszs/ack.vim'
 Plug 'markabe/bufexplorer'
 Plug 'majutsushi/tagbar'
@@ -13,13 +14,15 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'w0rp/ale'
+Plug 'Yggdroot/indentLine'
 
 Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " colors
-Plug 'chriskempson/base16-vim'
+" Plug 'chriskempson/base16-vim'
+Plug 'lifepillar/vim-solarized8'
 
 " files
 Plug 'kchmck/vim-coffee-script'
@@ -38,6 +41,11 @@ Plug 'fatih/vim-go'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'mxw/vim-jsx'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'sheerun/vim-polyglot'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'posva/vim-vue'
+Plug 'tmhedberg/matchit'
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -49,12 +57,23 @@ filetype plugin on
 autocmd BufWritePre * StripWhitespace
 
 syntax enable
+
+" Solarized colors
+" https://github.com/lifepillar/vim-solarized8
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
-set t_Co=256
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+" set t_Co=256
+set termguicolors
+colorscheme solarized8
+
+" Base16 colors
+" set background=dark
+" set t_Co=256
+" if filereadable(expand("~/.vimrc_background"))
+"   let base16colorspace=256
+"   source ~/.vimrc_background
+" endif
 
 
 " folding
@@ -78,14 +97,16 @@ set expandtab
 set autoindent
 set smartindent
 set nowrap
+set breakindent
 
 set wildmenu
 set wildmode=list:longest,full
 
 set statusline=[%n]\ %<%.55f\ %h%w%m%r%y
-set statusline+=%{fugitive#statusline()}
+" set statusline+=%{fugitive#statusline()}
 set statusline+=%=
-set statusline+=[%c,%l/%L\|%P\]
+set statusline+=[%l/%L\]
+" set statusline+=[%c,%l/%L\|%P\]
 
 set laststatus=1
 
@@ -95,6 +116,8 @@ set encoding=utf8
 set fileencoding=utf8
 set termencoding=utf8
 
+set spell spelllang=en_us
+
 " autoload a changed file http://stackoverflow.com/a/2158128/1042324
 set autoread
 au FocusGained,BufEnter * :silent! !
@@ -103,7 +126,7 @@ au FocusGained,BufEnter * :silent! !
 au BufNewFile,FocusGained,BufRead *.jbuilder set ft=ruby
 
 " Match ruby do/end
-runtime macros/matchit.vim
+" runtime macros/matchit.vim
 
 " ctrlp stuffs
 " let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
@@ -114,13 +137,14 @@ runtime macros/matchit.vim
 
 let mapleader = "\<Space>"
 
-" imap jj <esc>
+imap jj <esc>
 
 " Clearing search results
 nmap <silent> <C-l> :nohl<CR>
 
-nmap <silent> <Leader>q :bd<CR>
+nmap <silent> <Leader>q :close<CR>
 nmap <silent> <Leader>w :w<CR>
+nmap <silent> <Leader><Tab> :e #<CR>
 
 nmap <silent> <Leader>a :Files<CR>
 nmap <silent> <Leader>s :BufExplorer<CR>
@@ -130,7 +154,7 @@ nmap <silent> <Leader>g :NERDTreeToggle<CR>
 
 nmap <silent> <Leader>j :Tagbar<CR>
 nmap <silent> <Leader>k :e %:p:h<CR>
-nmap <silent> <Leader>l :Buffer<CR>
+nmap <silent> <Leader>l :set wrap! wrap?<CR>
 
 vmap <silent> <Leader>y "+y<CR>
 nmap <silent> <Leader>p "+p<CR>
@@ -142,6 +166,10 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 com! CopyPath :let @+ = expand("%:p")
+function! EditBundle(gem)
+  exec 'e' system("bundle show " . a:gem . " --paths")
+endfunction
+com! -nargs=1 EditBundle call EditBundle(<q-args>)
 
 " https://github.com/Valloric/YouCompleteMe
 " let g:ycm_key_list_select_completion = ['<Down>']
@@ -153,3 +181,10 @@ let g:UltiSnipsExpandTrigger="<c-l>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
 let g:ackprg = 'ag --vimgrep'
+" let g:ale_set_signs = 0
+let g:ale_linters = { 'ruby': ['brakeman', 'rubocop', 'ruby'] } " remove reek from ruby linters
+
+" Vue
+" Fix syntax hightlight https://vimawesome.com/plugin/vim-vue-fearless
+autocmd FileType vue syntax sync fromstart
+let g:vue_disable_pre_processors=1
