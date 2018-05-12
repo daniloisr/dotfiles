@@ -82,3 +82,7 @@
 	gpgsign = true
 [gpg]
 	program = gpg2
+[branch]
+	autosetuprebase = always
+[rebase]
+	autosquash = true
