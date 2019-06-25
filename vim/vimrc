@@ -19,6 +19,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'lambdalisue/gina.vim'
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-dispatch'
 call plug#end()
 
 syntax on
