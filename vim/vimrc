@@ -11,6 +11,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'morhetz/gruvbox'
 Plug 'lifepillar/vim-solarized8'
+Plug 'joshdick/onedark.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
@@ -25,7 +26,7 @@ call plug#end()
 syntax on
 
 set termguicolors
-colo solarized8
+colo onedark
 set background=dark
 
 set spelllang=en_us
@@ -37,7 +38,9 @@ set wildmenu wildmode=list:longest,full
 set ignorecase smartcase
 set hlsearch
 set incsearch
-set hidden
+" set hidden
+set exrc
+set secure
 
 let g:ctrlp_map = ''
 let g:ctrlp_user_command = 'fd -t f -H -E .git'
@@ -45,6 +48,7 @@ let g:ctrlp_mruf_relative = 1
 let g:strip_whitespace_on_save = 1
 let g:strip_whitespace_confirm = 0
 let g:ackprg = 'rg --vimgrep --smart-case'
+let g:fzf_tags_command = 'ripper-tags -R'
 " let g:ale_linters = {
 "       \ 'javascript': ['jshint'],
 "       \ }
