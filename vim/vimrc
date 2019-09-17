@@ -12,6 +12,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'morhetz/gruvbox'
 Plug 'lifepillar/vim-solarized8'
 Plug 'joshdick/onedark.vim'
+Plug 'noahfrederick/vim-hemisu'
 Plug 'vim-ruby/vim-ruby'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
@@ -21,13 +22,19 @@ Plug 'lambdalisue/gina.vim'
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-dispatch'
+Plug 'mhinz/vim-startify'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 syntax on
 
 set termguicolors
-colo onedark
-set background=dark
+colo hemisu
+set background=light
+" colo onedark
+" set background=dark
+" colo solarized8
+" set background=light
 
 set spelllang=en_us
 " set spell
@@ -38,7 +45,7 @@ set wildmenu wildmode=list:longest,full
 set ignorecase smartcase
 set hlsearch
 set incsearch
-" set hidden
+set hidden
 set exrc
 set secure
 
@@ -52,11 +59,14 @@ let g:fzf_tags_command = 'ripper-tags -R'
 " let g:ale_linters = {
 "       \ 'javascript': ['jshint'],
 "       \ }
+let g:startify_session_persistence = 1
 
 nm <silent> <c-p> :Files<CR>
 nm <silent> <c-l> :nohls<CR>
 nm <silent> <leader>B :Buffers<CR>
 nm <silent> <leader>f :NERDTreeFind<CR>
+
+com! CopyPath :let @+ = expand("%")
 
 au BufReadPost .rspec-distrib set filetype=ruby
 au BufReadPost Jenkinsfile set filetype=groovy
